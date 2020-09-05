@@ -15,11 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static java.util.Collections.list;
 
 /**
  * <p>
@@ -50,6 +47,7 @@ public class EduTeacherController {
     }
 
     //2 逻辑删除讲师的方法
+    @ApiOperation(value="逻辑删除讲师")
     @DeleteMapping("{id}")
     public R removeTeacher(@ApiParam(name = "id", value="讲师ID", required=true) @PathVariable String id){
         boolean flag = teacherService.removeById(id);
@@ -61,6 +59,7 @@ public class EduTeacherController {
     }
 
     //3 分页查询讲师的方法
+    @ApiOperation(value="分页查询讲师")
     @GetMapping("pageTeacher/{current}/{limit}")
     public R pageListTeacher(@PathVariable long current,
                              @PathVariable long limit){
@@ -83,6 +82,7 @@ public class EduTeacherController {
     }
 
     //4 条件查询带分页的方法
+    @ApiOperation(value="条件查询带分页")
     @PostMapping("pageTeacherCondition/{current}/{limit}")
     public R pageTeacherCondition(@PathVariable long current, @PathVariable long limit,
                                   @RequestBody(required = false) TeacherQuery teacherQuery){
@@ -123,10 +123,31 @@ public class EduTeacherController {
     }
 
     //添加讲师接口的方法
+    @ApiOperation(value="添加讲师")
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher eduTeacher){
         boolean save = teacherService.save(eduTeacher);
         if(save){
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    //根据讲师id查询
+    @ApiOperation(value="讲师id查询")
+    @GetMapping("getTeacher/{id}")
+    public R getTeacher(@PathVariable String id){
+        EduTeacher eduTeacher = teacherService.getById(id);
+        return R.ok().data("teacher", eduTeacher);
+    }
+
+    //讲师修改功能
+    @ApiOperation(value="讲师修改")
+    @PostMapping("updateTeacher")
+    public R updateTeacher(@RequestBody EduTeacher eduTeacher){
+        boolean flag = teacherService.updateById(eduTeacher);
+        if(flag){
             return R.ok();
         } else {
             return R.error();
