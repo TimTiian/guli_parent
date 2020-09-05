@@ -116,9 +116,21 @@ public class EduTeacherController {
 
         //调用方法实现条件查询分页
         teacherService.page(pageTeacher,wrapper);
+
         long total = pageTeacher.getTotal(); //总记录数
         List<EduTeacher> records = pageTeacher.getRecords(); //数据list集合
         return R.ok().data("total",total).data("rows", records);
+    }
+
+    //添加讲师接口的方法
+    @PostMapping("addTeacher")
+    public R addTeacher(@RequestBody EduTeacher eduTeacher){
+        boolean save = teacherService.save(eduTeacher);
+        if(save){
+            return R.ok();
+        } else {
+            return R.error();
+        }
     }
 }
 
