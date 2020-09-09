@@ -6,6 +6,7 @@ import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.entity.vo.TeacherQuery;
 import com.atguigu.eduservice.service.EduTeacherService;
 
+import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -66,6 +67,15 @@ public class EduTeacherController {
 
         // 创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+
+        try{
+            int i = 10/0;
+        } catch (Exception e){
+            //执行自定义异常
+            throw new GuliException(20001,"执行了自定义异常处理");
+        }
+
+
         // 调用方法实现分页
         // 调用方法时候，底层封装，把分页所有数据封装到pageTeacher对象里面
         teacherService.page(pageTeacher, null);
