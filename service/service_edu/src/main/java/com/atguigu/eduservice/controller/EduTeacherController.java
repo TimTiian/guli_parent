@@ -69,12 +69,12 @@ public class EduTeacherController {
         // 创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
 
-        try{
-            int i = 10/0;
-        } catch (Exception e){
-            //执行自定义异常
-            throw new GuliException(20001,"执行了自定义异常处理");
-        }
+//        try{
+//            int i = 10/0;
+//        } catch (Exception e){
+//            //执行自定义异常
+//            throw new GuliException(20001,"执行了自定义异常处理");
+//        }
 
 
         // 调用方法实现分页

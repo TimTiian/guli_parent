@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = ("com.atguigu"))
+@ComponentScan(basePackages = ("com.atguigu.servicebase"))
 public class EduApplication {
 
     public static void main(String[] args) {
